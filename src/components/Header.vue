@@ -1,7 +1,7 @@
 <template>
   <header class="header">
     <img alt="Digital Risks logo" src="../assets/digital-risks-white@2x.png" width="104" height="22">
-    <span>Call us on 0333 772 0759</span>
+    <span class="header__number" >Call us on 0333 772 0759</span>
   </header>
 </template>
 
@@ -21,5 +21,8 @@ export default {
 		justify-content: space-between;
 		align-items: center;
 		padding: 0 20px;
+	}
+	.header__number {
+		font-size: 14px;
 	}
 </style>
