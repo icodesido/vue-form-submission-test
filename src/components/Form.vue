@@ -1,9 +1,5 @@
 <template>
   <main>
-    <div class="errors" v-if="!reference" v-for="error in errors" v-bind:key="error">{{ error }}</div>
-    <div class="reference" v-if="reference">Your reference number is: 
-      <strong>{{ reference }}</strong>
-    </div>
     <form 
       class="policy-form" 
       name='policy-form'
@@ -11,6 +7,12 @@
       method="POST" 
       ref="policyForm"
       v-on:submit.prevent="submitPolicyForm">
+
+    <div class="errors" v-if="!reference" v-for="error in errors" v-bind:key="error">{{ error }}</div>
+    <div class="reference" v-if="reference">Your reference number is: 
+      <strong class="reference-number">{{ reference }}</strong>
+    </div>
+
       <fieldset class="policy-form__fieldset">
         <legend class="policy-form__legend">Your details</legend>
 
@@ -36,11 +38,13 @@
         <label for="ern" class="policy-form__label">Employee ERN</label>
         <input id="ern" type="input" class="policy-form__input" name="ern" v-model="ern">
 
-        <input id="ern_exempt" type="checkbox" class="policy-form__input" name="ern_exempt" v-model="ern_exempt" value="true">
-        <label for="ern_exempt" class="policy-form__label">We're either exempt from having an ERN or we can provide it within 30 days.</label>
+        <div class="checkbox__container">
+          <input id="ern_exempt" type="checkbox" class="policy-form__checkbox" name="ern_exempt" v-model="ern_exempt" value="true">
+          <label for="ern_exempt" class="policy-form__label--checkbox">We're either exempt from having an ERN or we can provide it within 30 days.</label>
+        </div>
 
-        <label for="address" class="policy-form__label">Address</label>
-        <textarea id="address" type="input" class="policy-form__input" name="address" v-model="address"></textarea>
+        <label for="address" class="policy-form__label">Premises address</label>
+        <textarea id="address" type="input" class="policy-form__input policy-form__textarea" name="address" v-model="address"></textarea>
       </fieldset>
 
       <fieldset class="policy-form__fieldset">
@@ -59,9 +63,9 @@
 
       <div class="footer">
         <div class="footer__total">
-          <p class="footer__header">Total premium</p>
+          <p class="footer__para">Total premium</p>
           <p class="footer__amount">{{ currency }}{{ total}}</p>
-          <p class="footer__tc">per monht. 0% APR, Tax inc.</p>
+          <p class="footer__para">per monht. 0% APR, Tax inc.</p>
         </div>
         <button type="submit" ref="submit" class="policy-form__button">Confirm</button>
       </div>
@@ -134,25 +138,104 @@ export default {
 
   .policy-form__fieldset {
     border: none;
+    border-top: 1px solid #f0f0f0;
     margin: 20px 0 0 0;
     padding: 0;
   }
 
   .policy-form__legend {
-    margin: 0px;
+    margin: 0;
     font-size: 12px;
     color: #aaa;
   }
 
-  .policy-form__fieldset {
-
+  .policy-form__label {
+    display: block;
+    margin: 15px 0 8px 0; 
   }
 
-  .policy-form__fieldset {
-
+  .policy-form__select {
+    height: 32px;
+    width: 198px;
+    background-color: #fff;    
   }
 
-  .policy-form__fieldset {
+  .checkbox__container {
+    float: left;
+    font-size: 10px;
+    margin: 12px 0 20px 0;
+  }
 
+  .policy-form__checkbox {
+    float: left;
+    margin-right: 8px;
+  }
+
+  .policy-form__input {
+    width: 228px;
+    padding-left: 6px;
+    height: 28px;
+    font-size: 13px;
+    box-sizing: content-box;
+    border: 1px solid #979797;
+    border-radius: 3px;
+  }
+
+  .policy-form__textarea {
+    appearance: textfield;
+    min-height: 89px;
+  }
+
+  .errors {
+    color: #ff2c6f;
+    margin: 20px 0;
+  }
+
+  .reference {
+    margin: 20px 0;
+  }
+
+  .reference-number {
+    display: block;
+    font-size: 18px;    
+    color: #ff2c6f;    
+  }
+
+  .footer {
+    background-color: #ff2c6f;
+    color: #fff;
+    margin-left: -20px;
+    width: 320px;
+    height: 60px;
+    padding: 10px 20px;
+    margin-top: 40px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;  
+  }
+
+  .footer__para {
+    font-size: 10px;
+    margin: 0; 
+  }
+
+  .footer__amount {
+    font-size: 26px;
+    margin: 0;
+  }
+
+  .policy-form__button {
+    width: 130px;
+    height: 40px;
+    background-color: #f4b400;
+    border: none;
+    font-size: 16px;
+    color: white;
+  }
+  .policy-form__button:hover,
+  .policy-form__button:active,
+  .policy-form__button:focus {
+    transition: all .5s ease-in;
+    background-color: #c79200;
   }
 </style>
