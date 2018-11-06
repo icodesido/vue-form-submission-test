@@ -96,11 +96,11 @@ export default {
   name: 'Form',
   methods: {
 
-    submitPolicyForm() {
+    async submitPolicyForm() {
 
       //this.$refs.submit.classList.add('u-submitting');
 
-      this.axios.post('https://dr-frontend-test-api.herokuapp.com/api/accounts', {
+      await this.axios.post('https://dr-frontend-test-api.herokuapp.com/api/accounts', {
         title: this.title, 
         first_name: this.first_name,
         last_name: this.last_name,
@@ -111,7 +111,8 @@ export default {
         password: this.password,
         password_confirmation: this.password_confirmation,
       }).then(this.formSuccess, this.formError);
-      },
+    
+    },
 
       formSuccess(succ) {
         this.reference = succ.data.ref;
